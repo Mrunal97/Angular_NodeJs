@@ -1,0 +1,327 @@
+<div class="container-sm">
+    <form #f="ngForm" class="mx-lg-auto mb-5 ml-xs-0" id="search-form">
+        <img src="https://csci571.com/hw/hw8/images/ebayHome.png" id="logo" class="mx-auto d-none d-md-block"
+            alt="ebay logo">
+            <img src="https://csci571.com/hw/hw8/images/ebayHome.png" id="logo2" class=" col-xs-12 d-block d-sm-none"            
+            alt="ebay logo">
+
+        <div class="form-group row align-items-center row row-bottom-margin set-font">
+            <label for="keywords" class="col-sm-2 col-form-label"><b>Key words<a id="ast">*</a></b></label>
+            <div class="col-sm-10 input-group-sm">
+                <input [(ngModel)]="keywordData" type="text" class="form-control set-font" id="keyword" name="keyword"
+                    placeholder="Enter keywords" />
+            </div>
+        </div>
+
+
+        <div class="form-group row align-items-center row row-bottom-margin set-font">
+            <label for="price-range" class="col-sm-2 col-form-label"><b>Price range</b></label>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col input-group-sm">
+                        <input [(ngModel)]="minPrice" type="number" class="form-control set-font" id="from" name="from"
+                            placeholder="Min Price" step="0.1" min="0.0">
+                    </div>
+                    <div class="col input-group-sm">
+                        <input [(ngModel)]="maxPrice" type="number" class="form-control set-font" id="to" name="to"
+                            placeholder="Max Price" step="0.1" min="0.0">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row align-items-center row row-bottom-margin">
+
+            <label for="Condition" class="col-lg-2 col-xs-12 col-md-2 col-form-label set-font"><b>Condition</b></label>
+            <div class="col-lg-10 col-xs-12 col-md-10 set-font">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" ngModel type="checkbox" name="condition1000" value="1000">
+                    <label class="form-check-label" for="new"><b>New</b></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" ngModel type="checkbox" name="condition3000" value="3000">
+                    <label class="form-check-label" for="used"><b>Used</b></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" ngModel type="checkbox" name="condition4000" value="4000">
+                    <label class="form-check-label" for="very good"><b>Very Good</b></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" ngModel type="checkbox" name="condition5000" value="5000">
+                    <label class="form-check-label" for="good"><b>Good</b></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" ngModel type="checkbox" name="condition6000" value="6000">
+                    <label class="form-check-label" for="acceptable"><b>Acceptable</b></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row align-items-center row row-bottom-margin set-font">
+            <label for="seller" class="col-sm-2 col-form-label"><b>Seller</b></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input align-middle" type="checkbox" ngModel name="return-accepted"
+                        id="return-accepted" value="Return Accepted">
+                    <label class="form-check-label align-middle" for="return-accepted"><b>Return Accepted</b></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row align-items-center row row-bottom-margin set-font">
+            <label for="shipping" class="col-sm-2 col-form-label"><b>Shipping</b></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" ngModel name="free" id="free" value="free">
+                    <label class="form-check-label" for="free"><b>Free</b></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" ngModel name="expedited" id="expedited"
+                        value="expedited">
+                    <label class="form-check-label" for="expedited"><b>Expedited</b></label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group row align-items-center row row-bottom-margin set-font">
+            <label for="sort-order" class="col-sm-2 col-form-label"><b>Sort Order</b></label>
+            <div class="col-sm-10 input-group-sm">
+                <select class="form-control set-font" id="sort-order" ngModel="BestMatch" name="sort-order">
+                    <option value="BestMatch">BestMatch</option>
+                    <option value="CurrentPriceHighest">CurrentPriceHighest</option>
+                    <option value="PricePlusShippingHighest">PricePlusShippingHighest</option>
+                    <option value="PricePlusShippingLowest">PricePlusShippingLowest</option>
+                </select>
+            </div>
+        </div>
+        <div class="btn-toolbar justify-content-end">
+            <button type="button" (click)="search()"
+                class="btn btn-primary d-flex justify-content-center align-content-between mr-2 btn-sm mt-1 set-font">
+                <i class="material-icons mr-1">search</i> <span id="search-id">Search</span>
+            </button>
+            <button type="reset" (click)="clear()"
+                class="btn btn-secondary d-flex justify-content-center align-content-between btn-sm mt-1 set-font" id="divclear">
+                <i class="material-icons mr-1">clear_all</i> <span  id="clear-id">Clear</span>
+            </button>
+        </div>
+    </form>
+    <div [ngClass]="showKeywordWarning ? 'd-block' : 'd-none'" class="alert alert-warning text-center set-font set-font-wt" role="alert">
+        Please enter a keyword
+    </div>
+    <div [ngClass]="showPriceWarning ? 'd-block' : 'd-none'" class="alert alert-warning text-center mx-0 set-font set-font-wt" role="alert" style="white-space: nowrap;">
+        Please use appropriate values for minPrice/maxPrice
+    </div>
+    <div [ngClass]="showNoResultsWarning ? 'd-block' : 'd-none'" class="alert alert-warning text-center set-font set-font-wt" role="alert">
+         No exact matches found
+    </div>
+</div>
+<div class="container-md mx-auto">
+    <div class="results mx-auto" *ngIf="items.length">
+        <div class="row">
+            <div class="col-lg-6 col-xs-auto col-md-5" id="rfk">
+                Results for {{keywordData}}
+            </div>
+            <div class="col-lg-6 col-xs-auto col-md-7 d-none d-md-block" style = "font-size:0.8rem;">
+                <pagination-controls class="my-pagination" (pageChange)="p = $event" maxSize = "10"></pagination-controls>
+            </div>
+            <div class=" col-xs-auto d-block d-sm-none ml-1" style = "font-size:0.7rem;">
+                <pagination-controls (pageChange)="p = $event" maxSize = "5"></pagination-controls>
+            </div>
+        </div>
+        <div class="card" *ngFor="let item of items | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
+            <div class="row" style="margin: auto; width: 100%;">
+                <div class="col-md-2 mx-auto text-center p-1">
+                    <img id="image-{{i}}" class="img-fluid" src={{item.galleryURL}} />
+                </div>
+                <div class="col-md-10 p-1">
+                    <div class="row mx-auto">
+                        <a class="" id="title-id" href={{item.viewItemURL}} target='_blank'>{{item.title}}</a>
+                    </div>
+    
+                    <div class="row mx-auto">
+                        <label class="col-form-label"><b>Price: </b><span id="price">${{item.currentPrice}}</span></label>
+                     
+                    </div>
+    
+                    <div class="row mx-auto" id="btnloc_id">
+                        <div class=""><i>{{item.location}}    </i>
+                            <!-- <button type="button" class="btn btn-light" id="btn_id">Show Details</button>
+                        </div> -->
+                            <button class="btn btn-light btn-sm ml-1 set-font" type="button" id="btn-{{i}}" (click)="funclick(i)"
+                                aria-expanded="false" aria-controls="collapseExample">
+                                Show Details
+                            </button>
+    
+                        </div>
+                    </div>
+    
+                    <div class="row mx-auto set-font" style="display: none;" id="collapse-{{i}}">
+                        <!-- <div class="card card-body"> -->
+                        <mat-tab-group class="mtg" selectedIndex="0">
+                            <mat-tab label="Basic Info">
+                                <div class="row mx-auto">
+                                    <div class="col-5 col-lg-2 col-md-3">
+                                        <label><b>Category Name</b></label>
+                                    </div>
+                                    <div class="col-7 col-lg-10 col-md-9">
+                                        <div>{{item.categoryName}}</div>
+                                    </div>
+    
+                                </div>
+    
+                                <div class="row mx-auto">
+                                    <div class="col-5 col-lg-2 col-md-3">
+                                        <label><b>Condition</b></label>
+                                    </div>
+                                    <div class="col-7 col-lg-10 col-md-9">
+                                        <div>{{item.condition}}</div>
+                                    </div>
+                                </div>
+    
+                            </mat-tab>
+                            <mat-tab label="Shipping Info">
+                                <div class="row mx-auto">
+                                    <div class="col-6 col-lg-2 col-md-4">
+                                        <label><b>Shipping Type</b></label>
+                                    </div>
+                                    <div class="col-6 col-lg-10 col-md-8">
+                                        <div>{{item.shippingType}}</div>
+                                    </div>
+    
+                                </div>
+    
+                                <div class="row mx-auto" >
+                                    <div class="col-6 col-lg-2 col-md-4">
+                                        <label><b>Shipping Cost</b></label>
+                                    </div>
+                                    <div class="col-6 col-lg-10 col-md-8">
+                                        <div>{{item.shippingServiceCost}}</div>
+                                    </div>
+                                </div>
+    
+                                <div class="row mx-auto">
+                                    <div class="col-6 col-lg-2 col-md-4">
+                                        <label><b>Shiptolocations</b></label>
+                                    </div>
+                                    <div class="col-6 col-lg-10 col-md-8">
+                                        <div>{{item.shipToLocations}}</div>
+                                    </div>
+                                </div>
+    
+                                <div class="row mx-auto">
+                                    <div class="col-6 col-lg-2 col-md-4">
+                                        <label><b>ExpeditedShipping</b></label>
+                                    </div>
+    
+                                    <div class="col-6 col-lg-10 col-md-8">
+                                        <div *ngIf="item.expeditedShipping == 'true'">
+                                            <i class="material-icons mr-1" id="done">done</i>
+                                        </div>
+                                        <div *ngIf="item.expeditedShipping == 'false'">
+                                            <i class="material-icons mr-1" id="cross">clear</i>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="row mx-auto">
+                                    <div class="col-6 col-md-4 col-lg-2">
+                                        <label><b>OneDayShippingAvailable</b></label>
+                                    </div>
+    
+                                    <div class="col-6 col-md-8 col-lg-10">
+                                        <div *ngIf="item.oneDayShippingAvailable == 'true'">
+                                            <i class="material-icons mr-1" id="done">done</i>
+                                        </div>
+                                        <div *ngIf="item.oneDayShippingAvailable == 'false'">
+                                            <i class="material-icons mr-1" id="cross">clear</i>
+                                        </div>
+                                    </div>
+    
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Listing Info">
+                                <div class="row mx-auto">
+                                    <div class="col-5 col-md-3 col-lg-2">
+                                        <label><b>BestOfferEnabled</b></label>
+                                    </div>
+    
+                                    <div class="col-7 col-md-9 col-lg-10">
+                                        <div *ngIf="item.bestOfferEnabled == 'true'">
+                                            <i class="material-icons mr-1" id="done">done</i>
+                                        </div>
+                                        <div *ngIf="item.bestOfferEnabled == 'false'">
+                                            <i class="material-icons mr-1" id="cross">clear</i>
+                                        </div>
+                                    </div>
+    
+    
+                                </div>
+    
+                                <div class="row mx-auto">
+                                    <div class="col-5 col-md-3 col-lg-2">
+                                        <label><b>BuyItNowAvailable</b></label>
+                                    </div>
+    
+    
+                                    <div class="col-7 col-md-9 col-lg-10">
+                                        <div *ngIf="item.buyItNowAvailable == 'true'">
+                                            <i class="material-icons mr-1" id="done">done</i>
+                                        </div>
+                                        <div *ngIf="item.buyItNowAvailable == 'false'">
+                                            <i class="material-icons mr-1" id="cross">clear</i>
+    
+                                        </div>
+                                    </div>
+    
+    
+                                </div>
+    
+                                <div class="row mx-auto">
+                                    <div class="col-5 col-md-3 col-lg-2">
+                                        <label><b>ListingType</b></label>
+                                    </div>
+                                    <div class="col-7 col-md-9 col-lg-10">
+                                        <div>{{item.listingType}}</div>
+                                    </div>
+                                </div>
+    
+                                <div class="row mx-auto">
+                                    <div class="col-5 col-md-3 col-lg-2">
+                                        <label><b>Gift</b></label>
+                                    </div>
+    
+                                    <div class="col-7 col-md-9 col-lg-10">
+                                        <div *ngIf="item.gift == 'true'">
+                                            <i class="material-icons mr-1" id="done">done</i>
+                                        </div>
+                                        <div *ngIf="item.gift == 'false'">
+                                            <i class="material-icons mr-1" id="cross">clear</i>
+                                        </div>
+                                    </div>
+    
+                                </div>
+    
+                                <div class="row mx-auto">
+                                    <div class="col-5 col-md-3 col-lg-2">
+                                        <label><b>WatchCount</b></label>
+                                    </div>
+                                    <div class="col-7 col-md-9 col-lg-10">
+                                        <div>{{item.watchCount}}</div>
+                                    </div>
+                                </div>
+    
+                            </mat-tab>
+                        </mat-tab-group>
+    
+    
+                    </div>
+    
+    
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+</div>

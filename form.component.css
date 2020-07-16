@@ -1,0 +1,98 @@
+#logo {
+    width: 250px;
+}
+
+#ast {
+    color: red;
+}
+
+.container-sm {
+    max-width: 700px;
+}
+
+.form-check-inline {
+    margin-right: 0.5rem;
+}
+
+.row-bottom-margin {
+    margin-bottom: 0.5rem;
+}
+
+.alert {
+    color: black;
+    text-align: center;
+}
+
+#title-id {
+    /* text-transform: uppercase; */
+    font-size: medium;
+}
+
+.img-fluid {
+    max-width: 90%;
+    height: auto;
+}
+
+ul.ngx-pagination{
+    padding-inline-start: 0 !important; 
+}
+
+#rfk{
+    font-size:20px;
+}
+
+.card {
+    background-color: #C2C6C9;
+    margin-bottom: 3%;
+}
+#btn_id{
+    margin-left:6%;
+}
+
+#btnloc_id
+{
+    white-space: nowrap;
+}
+
+#cross {
+    color: red;
+}
+
+#done {
+    color: green;
+}
+
+#logo2 {
+    width: 100%;
+    margin-top: 3%;
+}
+
+#logo {
+    width: 32%;
+    margin-top: 3%;
+}
+
+.set-font {
+    font-size: 0.82rem;
+}
+
+.my-pagination /deep/ .ngx-pagination a {
+    padding-right: 0.35rem;
+    padding-left: 0.35rem;
+}
+.my-pagination /deep/ .ngx-pagination .current{
+    padding-right: 0.35rem;
+    padding-left: 0.35rem;   
+}
+
+#divclear:hover #clear-id{
+    color: black;
+}
+
+#clear-id, #search-id{
+    margin-top: 0.1rem;
+}
+
+.set-font-wt{
+    font-weight: 560;
+}
